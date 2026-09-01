@@ -271,7 +271,6 @@
     <span class="sla">N1 · resposta em minutos</span>
   </div>
 
-
   <div class="card">
     <form id="formChamado">
 
@@ -391,9 +390,20 @@ function enviarParaWhatsApp() {
         return;
     }
 
+    // Obtém data e hora atuais no formato pt-BR (ex: 28/05/2024 14:30)
+    const agora = new Date();
+    const dataHoraFormatada = agora.toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
     const listaProblemasTexto = problemasSelecionados.map(p => `• ${p}`).join('\n');
 
     const texto = `*NOVO CHAMADO DE TI (N1)*\n\n` +
+                  `*Data/Hora:* ${dataHoraFormatada}\n` +
                   `*Solicitante:* ${nome}\n` +
                   `*Setor/Local:* ${setor}\n` +
                   `*Urgência:* ${prioridade}\n\n` +
